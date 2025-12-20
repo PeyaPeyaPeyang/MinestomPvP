@@ -30,6 +30,7 @@ import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 import net.minestom.server.sound.SoundEvent;
+import net.minestom.server.world.attribute.EnvironmentAttribute;
 
 /**
  * Vanilla implementation of {@link ExplosiveFeature}
@@ -139,26 +140,8 @@ public class VanillaExplosiveFeature implements ExplosiveFeature, RegistrableFea
 					return;
 				}
 			}
-			
+
 			if (charges == 0) return;
-			
-			if (instance.getExplosionSupplier() != null
-					&& MinecraftServer.getDimensionTypeRegistry().get(instance.getDimensionType()).respawnAnchorWorks()) {
-				var anchorExplodeEvent = new AnchorExplodeEvent(player, event.getBlockPosition());
-				EventDispatcher.callCancellable(anchorExplodeEvent, () -> {
-					instance.setBlock(event.getBlockPosition(), Block.AIR);
-					instance.explode(
-							(float) (event.getBlockPosition().x() + 0.5),
-							(float) (event.getBlockPosition().y() + 0.5),
-							(float) (event.getBlockPosition().z() + 0.5),
-							5.0f,
-							CompoundBinaryTag.builder()
-									.putBoolean("fire", true)
-									.putBoolean("anchor", true)
-									.build()
-					);
-				});
-			}
 			
 			event.setBlockingItemUse(true);
 		});

@@ -44,7 +44,7 @@ public class PvpTest {
 		//MinestomFluids.init();
 		//VelocityProxy.enable("tj7MulOtnIDe");
 		
-		DimensionType fullbright = DimensionType.builder().ambientLight(1.0f).respawnAnchorWorks(true).build();
+		DimensionType fullbright = DimensionType.builder().ambientLight(1.0f).build();
 		RegistryKey<DimensionType> fullbrightKey =
 				MinecraftServer.getDimensionTypeRegistry().register(Key.key("idk"), fullbright);
 		
